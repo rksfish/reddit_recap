@@ -1,0 +1,13 @@
+{
+  "name": "reddit_recap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "parseData": "node data/",
+    "start": "http-server"
+  },
+  "author": "",
+  "license": "ISC"
+}
