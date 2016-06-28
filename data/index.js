@@ -23,11 +23,14 @@ function beautifyJson(err, data) {
   const parseData = convertedData.data.children;
   const parsedJson = {};
   parsedJson.data = [];
+  var post = {};
 
   for (var i = 0; i < parseData.length; i++) {
     // creates a new post object to be stored in our parsedJson file
-    const post = {};
+    console.log(i)
+    post = {};
     for (var key in parseData[i].data) {
+      // console.log('i',i);
       // Conditions
       switch (key) {
         case 'author':
@@ -51,12 +54,15 @@ function beautifyJson(err, data) {
         default:
       }
     }
+    console.log(i, post)
     parsedJson.data.push(post);
+    post = {};
     // Status Indacator for largeFiles;
-    process.stdout.clearLine();
-    process.stdout.cursorTo(0);
-    process.stdout.write("percent parsed: " + (Math.floor((parsedJson.data.length/parseData.length) * 100)) + "%");
+    // process.stdout.clearLine();
+    // process.stdout.cursorTo(0);
+    // process.stdout.write("percent parsed: " + (Math.floor((parsedJson.data.length/parseData.length) * 100)) + "%");
   }
+  // console.log('parsedJson.data',parsedJson.data);
   console.log('\nWriting data to new file: ' + returnFile);
   // Callback to write data when parsing is finished.
   writeData(JSON.stringify(parsedJson, null, 2), returnFile, encFormat);
