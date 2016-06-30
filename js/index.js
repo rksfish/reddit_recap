@@ -33,11 +33,66 @@ window.onload = function () {
     if (req.readyState === XMLHttpRequest.DONE) {
       var data = JSON.parse(req.response)
       window.reddit_feed = data;
+
+      startProccess();
     }
   }
   var time = document.querySelectorAll('.time')
   for (var i = 0; i < time.length; i++) {
     var unixTime = time[i].innerHTML;
     time[i].innerHTML = moment.unix(unixTime);
+  }
+}
+
+//All Custom Code GOES IN Here
+function startProccess(){
+  for (var i = 0; i < reddit_feed.data.length; i++) {
+    var currentArticle = window.reddit_feed.data[i];
+    console.log(currentArticle);
+    var author = currentArticle.author;
+
+    //create HTML elements in memory
+    var contianer = document.createElement('div');
+    contianer.className = "col-sm-12 col-md-4";
+
+    var post = document.createElement('div');
+    post.className = "post";
+    contianer.appendChild(post);
+
+    var link = document.createElement('a');
+    link.href = 'javascript.viod(0)';
+    post.appendChild(link);
+
+    var thumbnail = document.createElement('div');
+    thumbnail.className = 'thumbnail';
+    link.appendChild(thumbnail);
+
+    var image = document.createElement('img');
+    image.src = currentArticle.thumbnail;
+    thumbnail.appendChild(image);
+
+    var author = document.createElement('div');
+    author.className = 'author';
+    author.innerHTML = 'Bradah Yuks'
+    link.appendChild(author);
+
+    var title = document.createElement('div');
+    title.className = 'title';
+    title.innerHTML = 'Ho brah It ma burthday eh'
+    link.appendChild(title);
+
+    var body = document.createElement('div');
+    body.className = 'body';
+    body.innerHTML = 'No Body'
+    link.appendChild(body);
+
+    var time = document.createElement('div');
+    time.className = 'time';
+    time.innerHTML = '1466833382'
+    link.appendChild(time);
+
+
+
+    document.getElementById('main').appendChild(contianer);
   }
 }
